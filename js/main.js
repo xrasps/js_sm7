@@ -35,7 +35,7 @@ function addArray() {
         date: inputDate.value,
         text: inputText.value,
         author: inputAuthor.value,
-
+        id: news.length + 1
     }
 
     news.push(object)
