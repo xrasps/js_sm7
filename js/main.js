@@ -1,56 +1,50 @@
-let news_list = document.querySelector(".news");
+let news = []
 
-let news = [
-    {
-        name:"Exhibition Van Gog",
-        date:"1.09.20023",
-        text:"Hola. Hola. Hola. Como estas? Estoy bien. Estoy muy bien",
-        author: "Mario",
-        id:"1"
-    },
-    {
-        name:"Zelensky urges unity in dramatic UN address",
-        date:"13.09.20023",
-        text:"Ukrainian President Volodymyr Zelensky urged a global front against Russian aggression in a dramatic speech delivered Tuesday during the UN General Assembly – his first in-person address to the global body since Russia’s 2022 invasion.",
-        author: "Bred",
-        id:"2"
-    },
-    {
-        name:"China declines to address WSJ report foreign minister ",
-        date:"12.09.20023",
-        text:"China’s Foreign Ministry on Tuesday declined to address a report its former foreign minister Qin Gang was ousted from his position over an alleged extramarital affair.",
-        author: "Kim Chen En",
-        id:"3"
-    },
-    {
-        name:"Exclusive: Qatar PM touts",
-        date:"11.09.20023",
-        text:"Emad Shargi, Morad Tahbaz and Siamak Namazi, along with two Americans who have not been publicly named, arrived Tuesday at a military airfield in Virginia after being flown out of Iran the previous day on a Qatari government jet.",
-        author: "Mahmud",
-        id:"4"
+let inputName = document.getElementById('inputName')
+let inputText = document.getElementById('inputText')
+let inputDate = document.getElementById('inputDate')
+let inputAuthor = document.getElementById('inputAuthor')
+let btn_sub = document.getElementById('btn_sub')
 
-    },
-    {
-        name:"Prince William announces his 2023 Earthshot finalists",
-        date:"10.09.20023",
-        text:"The Prince of Wales has revealed the shortlist of 15 innovators in the running to win one of five £1 million (about $1.2 million) grants from his prestigious eco-prize later this year.",
-        author: "Wilgelm",
-        id:"5"
+let newsPlace = document.querySelector('.news')
+
+function showArr(arr){
+    arr.forEach( x=> {
+        newsPlace.insertAdjacentHTML ('beforeend', `
+        <div class="news_item">
+                        <div class="news_head">
+                            <div class="news_name">${x.title}</div>
+                            <div class="news_date">${x.date}</div>
+                        </div>
+                        
+                        <div class="news_text">${x.text}
+                        </div>
+                        <div class="news_footer">
+                            <div class="news_author">${x.author}</div>
+                            <div class="news_id">id: ${x.id} </div>
+                        </div>
+                    </div>
+        `)
     }
-]
-
-news.forEach( n => {
-    news_list.insertAdjacentHTML("beforeend",
-        `<div class="block"><div class="newss">
-        <div class="header">
-        <h2 class="name"> ${n.name}</h2>
-        <h4 class="date"> ${n.date}</h4>
-        </div>
-        <p class="text"> ${n.text}</p>
-        <div class="footer">
-        <h3 class="author"> ${n.author}</h3>
-        <h4 class="id"> ${n.id}</h4>
-        </div>
-    </div></div>`)
+        )
 }
-)
+
+function addArray() {
+    let object = {
+        title: inputName.value,
+        date: inputDate.value,
+        text: inputText.value,
+        author: inputAuthor.value,
+
+    }
+
+    news.push(object)
+        newsPlace.innerHTML = ''
+        inputName.value = ''
+        inputText.value = ''
+        inputDate.value = ''
+        inputAuthor.value = ''
+        showArr(news)
+    
+}
+btn_sub.addEventListener('click', addArray)
